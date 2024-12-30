@@ -29,7 +29,8 @@ actor Token {
   };
 
   public shared(msg) func payOut() : async Text {
-    // Debug.print(debug_show(msg.caller));
+    Debug.print("Debugging payOut function");
+    Debug.print(debug_show(msg.caller));
     if (balances.get(msg.caller) == null) {
       let amount = 10000;
       let result = await transfer(msg.caller, amount);
@@ -40,6 +41,9 @@ actor Token {
   };
 
   public shared(msg) func transfer(to : Principal, amount: Nat) : async Text {
+    Debug.print("Debugging transfer function");
+    Debug.print(debug_show(msg.caller));
+    Debug.print(debug_show(to));
     let fromBalance = await balanceOf(msg.caller);
 
     if (fromBalance > amount) {

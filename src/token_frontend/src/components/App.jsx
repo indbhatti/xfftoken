@@ -4,10 +4,9 @@ import Faucet from "./Faucet";
 import Balance from "./Balance";
 import Transfer from "./Transfer";
 
-function App( { userPrincipal } ) {
-
+function App({ userPrincipal }) {
   return (
-    <div id="screen">
+    <div className="flex flex-col items-center justify-center gap-8">
       <Header />
       <Faucet userPrincipal={userPrincipal} />
       <Balance />
