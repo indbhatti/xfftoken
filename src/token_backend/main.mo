@@ -4,11 +4,11 @@ import Debug "mo:base/Debug";
 import Iter "mo:base/Iter";
 
 actor Token {
-  let owner : Principal = Principal.fromText("cumay-uf2zm-zvaa2-risw7-huvlm-b6f6h-u6k45-qqfa4-mxj6h-i5tse-bae");
+  let owner : Principal = Principal.fromText("li3wk-wqaaa-aaaan-qmmyq-cai");
   let totalSupply : Nat = 1000000000;
   var symbol : Text = "XFF";
 
-  private stable var balanceEntries: [(Principal, Nat)]= [];
+  private var balanceEntries: [(Principal, Nat)]= []; // Should be stable ehhe
 
   private var balances = HashMap.HashMap<Principal, Nat>(1, Principal.equal, Principal.hash);
   if (balances.size() < 1) {
@@ -29,8 +29,6 @@ actor Token {
   };
 
   public shared(msg) func payOut() : async Text {
-    Debug.print("Debugging payOut function");
-    Debug.print(debug_show(msg.caller));
     if (balances.get(msg.caller) == null) {
       let amount = 10000;
       let result = await transfer(msg.caller, amount);
@@ -41,9 +39,6 @@ actor Token {
   };
 
   public shared(msg) func transfer(to : Principal, amount: Nat) : async Text {
-    Debug.print("Debugging transfer function");
-    Debug.print(debug_show(msg.caller));
-    Debug.print(debug_show(to));
     let fromBalance = await balanceOf(msg.caller);
 
     if (fromBalance > amount) {
